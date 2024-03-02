@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  --primary-light: 224 231 255;
+  --primary-dark: 55 48 163;
+
+  --secondary-light: 240 240 240;
+  --secondary-dark: 61 72 82;
+
+  --mono-light: 255 255 255;
+  --mono-dark: 0 0 0;
+
+  --success-light: 222 247 236;
+  --success-dark: 3 84 63;
+
+  --danger-light: 253 232 232;
+  --danger-dark: 155 28 28;
+}
+
+html.dark {
+  --primary-light: 30 58 138;
+  --primary-dark: 147 197 253;
+
+  --secondary-light: 61 72 82;
+  --secondary-dark: 240 240 240;
+
+  --mono-light: 0 0 0;
+  --mono-dark: 255 255 255;
+
+  --success-light: 1 71 55;
+  --success-dark: 132 225 188;
+
+  --danger-light: 119 29 29;
+  --danger-dark: 248 180 180;
+}

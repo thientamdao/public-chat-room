@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:  
+  web:
+    build: ./client
+    ports:
+      - 8000:8000
+    environment:
+      VITE_API_BASE_URL: 'http://localhost:8080'
+  api:
+    build: ./server
+    ports:
+      - 8080:8080
+    environment:
+      DB_URL: jdbc:postgresql://db/public-chat-room
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      GOOGLE_ID: CLIENT-ID
+      GOOGLE_SECRET: CLIENT-SECRET
+      TOKEN_EXPIRATION: 3600000
+      TOKEN_SECRET: this-string-is-a-jwt-refresh-key
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      CLIENT_URL: http://localhost:8000
+    depends_on:
+      db:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+  db:
+    image: postgres:16.2
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: public-chat-room
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - public-chat-room:/var/lib/postgresql
+  elasticsearch:
+    image: elasticsearch:7.17.18
+    ports:
+      - 9200:9200
+    environment:
+      - "discovery.type=single-node"
+    healthcheck:
+      test: curl -s http://elasticsearch:9200 >/dev/null || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  public-chat-room:
