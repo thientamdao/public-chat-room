@@ -42,3 +42,7 @@ To run this project locally, follow these steps:
    - In the docker-compose.yml file, assign your `Client ID` to the `GOOGLE_ID`, and `Client Secret` to the `GOOGLE_SECRET`.
    - You can update the values of other environment variables too, according to your preferences.
 5. Navigate to the root directory and run `docker-compose up`.
+
+## Demo
+
+https://github.com/thientamdao/public-chat-room/assets/74353835/2b472550-f4f2-4c29-8029-cd8b7da046af
